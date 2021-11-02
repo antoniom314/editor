@@ -1,0 +1,95 @@
+<div class="container p-0" id="container"
+style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Times New Roman', Times, serif, Cochin, Georgia, Times, 'Times New Roman', serif;">
+
+  <div class="d-flex flex-column m-auto justify-content-center align-items-center py-3">
+
+    <div id="editor" class="p-1 col-lg-10">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-justified p-2">
+        <li class="nav-item m-1">
+          <a class="nav-link active" data-toggle="tab" href="#addImage">Image</a>
+        </li>
+        <li class="nav-item m-1">
+          <a class="nav-link" data-toggle="tab" href="#addText">Text</a>
+        </li>
+        <li class="nav-item m-1">
+          <a class="nav-link" data-toggle="tab" href="#addBackground">Background</a>
+        </li>
+      </ul>
+
+      <div class="m-0">
+        <div class="tab-content" id="controls">
+
+          <div class="tab-pane container active" id="addImage">
+            <div class="d-flex mb-1 mt-2">
+              <button class="btn btn-sm" (click)="createForegroundImage()" style="height: 38px; width: 40px;">
+                <img src="../../assets/icons/plus-solid.svg" /></button>
+              <button class="btn btn-sm ml-auto" (click)="deleteElement()" style="height: 38px; width: 40px;">
+                <img src="../../assets/icons/trash-solid.svg" /></button>
+            </div>
+             <input class="form-control mt-3 mr-2" (change)="fileSelected($event)" type="file">
+          </div>
+
+          <div class="tab-pane container fade mt-2" id="addText">
+            <div class="d-flex mb-1">
+              <button class="btn btn-sm" (click)="createForegroundText()" style="height: 38px; width: 40px;">
+                <img src="../../assets/icons/plus-solid.svg" /></button>
+              <button class="btn btn-sm ml-auto" (click)="deleteElement()" style="height: 38px; width: 40px;">
+                <img src="../../assets/icons/trash-solid.svg" /></button>
+            </div>
+
+
+            <div #textBar class="d-flex align-items-center justify-content-start p-0  mt-4 mb-1">
+
+              <button class="btn btn-sm mr-2" #bold style="height: 31px; width: 31px;" (click)="boldClicked()" [ngClass]="{'btn-secondary': boldSelected == true}">
+                <img src="../../assets/icons/bold-solid.svg" /></button>
+              <button class="btn btn-sm mr-2" style="height: 31px; width: 31px;" [ngClass]="{'btn-secondary': italicSelected == true}" (click)="italicClicked()">
+                <img src="../../assets/icons/italic-solid.svg" /></button>
+
+              <select class="select mr-2" [(ngModel)]="selectedFontFamily" (change)="onSelectFontFamily()">
+                <!-- <option style="font-family:'Times New Roman';" class="Times-New-Roman">Times New Roman</option>
+                <option style="font-family:Verdana, Geneva, sans-serif;" class="Verdana">Verdana</option> -->
+                <option [ngStyle]="{ 'font-family': fontStyle.name  }" [value]="fontStyle.name" *ngFor="let fontStyle of fontStyles">{{fontStyle.name}}</option>
+              </select>
+              <select class="select mr-2" [(ngModel)]="selectedFontSize" (change)="onSelectFontSize()">
+                <option [value]="fontSize.id" *ngFor="let fontSize of fontSizes">{{fontSize.name}}</option>
+              </select>
+
+              <div class="d-flex">
+                <div class=" mr-3 d-flex justify-content-center align-content-center">
+                  <input [(ngModel)]="selectedFillColor" (change)="onSelectFillColor($event)" style="position: absolute;" ejs-colorpicker type="color" id="fill" />`
+                </div>
+                <div class="d-flex justify-content-center align-content-center mr-3 bg-primary">
+                  <input [(ngModel)]="selectedStrokeColor" (change)="onSelectStrokeColor($event)" style="position: absolute;" ejs-colorpicker type="color" id="stroke" />`
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+          <div class="tab-pane container fade" id="addBackground">
+
+            <div class="d-flex mb-1 mt-2">
+              <button class="btn btn-sm" (click)="createBackgroundImage()" style="height: 38px; width: 40px;">
+                <img src="../../assets/icons/plus-solid.svg" /></button>
+              <button class="btn btn-sm ml-auto" (click)="deleteElement()" style="height: 38px; width: 40px;">
+                <img src="../../assets/icons/trash-solid.svg" /></button>
+            </div>
+
+            <input class="form-control mt-3 mr-2" (change)="fileSelected($event)" type="file">
+          </div>
+        </div>
+
+      </div>
+
+      <div #page id="page" class="mx-3 my-2"></div>
+
+      <div class="pb-3 pt-2 d-flex">
+        <button class="btn btn-sm ml-auto mr-3" (click)="downloadPDF()" type="button">Download PDF</button>
+        <button class="btn btn-sm mr-3" (click)="downloadJPG()" type="button">Download JPG</button>
+      </div>
+    </div>
+  </div>
+</div>

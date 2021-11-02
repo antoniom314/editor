@@ -19,6 +19,7 @@
     "lib": [
       "es2018",
       "dom"
+
     ]
   },
   "angularCompilerOptions": {
@@ -27,4 +28,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   }
+
 }

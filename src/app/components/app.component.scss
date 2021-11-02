@@ -1,0 +1,59 @@
+
+#editor {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  // margin-right: auto;
+  // margin-left: auto;
+  // max-width: 820px;
+  background-color: #5daa69d2;
+  border-color: #24802c;
+  border-style: solid;
+  border-width: 1px;
+  padding-right: 2px;
+}
+#page {
+  width: auto;
+  aspect-ratio: 1/1.4142;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  // background-color: #eff8f0;
+  background-color: #f8f4ee;
+  // margin: 9px;
+}
+#dropdown {
+  position: relative;
+}
+#dropdown-menu {
+  display: none;
+}
+
+select {
+  background-color: rgba(238, 238, 238, 0.945);
+  height: 1.88em;
+  border-style: none;
+  border-radius: 3px;
+}
+option {
+  background-color: white;
+}
+
+a::active {
+  background-color: #6e684f;
+}
+a::focus {
+  background-color: #79704f;
+}
+button {
+  background-color: #FAF1CF;
+}
+a {
+  background-color: #FAF1CF;
+  color: #24802c;
+}
+input {
+  background-color: #FAF1CF;
+}
+.select {
+  background-color: #FAF1CF;
+}
+
