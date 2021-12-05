@@ -1,7 +1,6 @@
-<div class="container p-0" id="container"
-style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Times New Roman', Times, serif, Cochin, Georgia, Times, 'Times New Roman', serif;">
+<div class="container p-0" id="container">
 
-  <div class="d-flex flex-column m-auto justify-content-center align-items-center py-3">
+  <div class="d-flex flex-column m-auto justify-content-center align-items-center">
 
     <div id="editor" class="p-1 col-lg-10">
       <!-- Nav tabs -->
@@ -24,7 +23,7 @@ style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Luc
             <div class="d-flex mb-1 mt-2">
               <button class="btn btn-sm" (click)="createForegroundImage()" style="height: 38px; width: 40px;">
                 <img src="../../assets/icons/plus-solid.svg" /></button>
-              <button class="btn btn-sm ml-auto" (click)="deleteElement()" style="height: 38px; width: 40px;">
+              <button class="btn btn-sm ml-auto" (click)="deleteElements()" style="height: 38px; width: 40px;">
                 <img src="../../assets/icons/trash-solid.svg" /></button>
             </div>
              <input class="form-control mt-3 mr-2" (change)="fileSelected($event)" type="file">
@@ -34,7 +33,7 @@ style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Luc
             <div class="d-flex mb-1">
               <button class="btn btn-sm" (click)="createForegroundText()" style="height: 38px; width: 40px;">
                 <img src="../../assets/icons/plus-solid.svg" /></button>
-              <button class="btn btn-sm ml-auto" (click)="deleteElement()" style="height: 38px; width: 40px;">
+              <button class="btn btn-sm ml-auto" (click)="deleteElements()" style="height: 38px; width: 40px;">
                 <img src="../../assets/icons/trash-solid.svg" /></button>
             </div>
 
@@ -74,7 +73,7 @@ style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Luc
             <div class="d-flex mb-1 mt-2">
               <button class="btn btn-sm" (click)="createBackgroundImage()" style="height: 38px; width: 40px;">
                 <img src="../../assets/icons/plus-solid.svg" /></button>
-              <button class="btn btn-sm ml-auto" (click)="deleteElement()" style="height: 38px; width: 40px;">
+              <button class="btn btn-sm ml-auto" (click)="deleteElements()" style="height: 38px; width: 40px;">
                 <img src="../../assets/icons/trash-solid.svg" /></button>
             </div>
 

@@ -1,10 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import jsPDF from 'jspdf';
 import { Layer } from 'konva/lib/Layer';
-import { NodeConfig } from 'konva/lib/Node';
-import { Shape } from 'konva/lib/Shape';
-import { Image } from 'konva/lib/shapes/Image';
-import { Rect } from 'konva/lib/shapes/Rect';
 import { Text } from 'konva/lib/shapes/Text';
 import { Transformer } from 'konva/lib/shapes/Transformer';
 import { Stage } from 'konva/lib/Stage';
@@ -26,7 +23,7 @@ import { TextService } from '../services/text.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'PDF Editor';
+  title = 'Editor';
 
   @ViewChild('page') page?: ElementRef<any>;
   @ViewChild('textBar') textBar?: ElementRef<any>;
@@ -47,7 +44,8 @@ export class AppComponent implements OnInit {
   constructor(
     private canvasService: CanvasService,
     private shapeService: TextService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private activatedRoute: ActivatedRoute
   ) {
     (async () => {
       await new Promise((f) => setTimeout(f, 1000));
@@ -56,8 +54,25 @@ export class AppComponent implements OnInit {
       this.backgroundImageLayer = this.canvasService.createLayer(this.stage);
       this.foregroundImageLayer = this.canvasService.createLayer(this.stage);
       this.foregroundTextLayer = this.canvasService.createLayer(this.stage);
+
+      this.activatedRoute.queryParams.subscribe((params) => {
+        // Create Poster background if there is poster URL sended from Movies App
+        if (params.image_url) {
+
+          this.imageService.setMoviePosterImageUrl(params.image_url);
+          this.imageService.createImage(
+            this.randomString(),
+            this.backgroundImageLayer,
+            this.page,
+            null
+          );
+        }
+
+
+      });
     })();
   }
+
   ngOnInit(): void {}
 
   selectedFontFamily: string = 'Arial';
@@ -110,7 +125,6 @@ export class AppComponent implements OnInit {
     this.textElements.set(name, text);
   }
   createBackgroundImage() {
-
     this.imageService.createImage(
       this.randomString(),
       this.backgroundImageLayer,
@@ -119,8 +133,7 @@ export class AppComponent implements OnInit {
     );
   }
   createForegroundImage() {
-
-    const rect: RectPosition = {x: 40, y: 40, width: 200, height: 120};
+    const rect: RectPosition = { x: 40, y: 40, width: 200, height: 120 };
     this.imageService.createImage(
       this.randomString(),
       this.foregroundImageLayer,
@@ -129,11 +142,9 @@ export class AppComponent implements OnInit {
     );
   }
 
-  createTextElement(name: string) {
+  createTextElement(name: string) {}
 
-  }
-
-  deleteElement() {
+  deleteElements() {
     this.stage.find('Transformer').forEach((tr) => {
       if (tr.isVisible()) {
         const layer = tr.getParent();
@@ -249,12 +260,15 @@ export class AppComponent implements OnInit {
 
   async downloadPDF() {
     this.unselectAll();
-    const width = this.page?.nativeElement.getBoundingClientRect().width / 2;
-    const height = this.page?.nativeElement.getBoundingClientRect().height / 2;
 
     const stageURL = this.stage.toDataURL({ pixelRatio: 3 });
     const pdf = new jsPDF('p', 'px');
-    pdf.addImage(stageURL, 0, 0, width, height);
+    const imageProperties = pdf.getImageProperties(stageURL);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight =
+      (imageProperties.height * pdfWidth) / imageProperties.width;
+
+    pdf.addImage(stageURL, 0, 0, pdfWidth, pdfHeight);
     pdf.save('downloadPDF.pdf');
   }
 
@@ -278,10 +292,8 @@ export class AppComponent implements OnInit {
     this.imageService.setSelectedImage(event.target.files[0]);
   }
   unselectAll() {
-
     this.stage.find('Transformer').forEach((tr) => {
       if (tr.isVisible()) {
-
         tr.hide();
         // const layer = tr.getParent();
         // layer.draw();

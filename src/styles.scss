@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+.loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader-content {
+  height: 2em;
+  width: 16em;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 4em;
+}
+.loader-text {
+  margin: 0em;
+  margin-left: 0.8em;
+  margin-right: 0.8em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #7e7e7e;
+}
+.loader-spiner {
+  /* margin-top:  0.6em;*/
+  margin-bottom: 0.208em; // 0px;
+  width: 1.2em; // 14px;
+  height: 1.2em; // 14px;
+  border: 3px solid #d4d4d4;
+  border-radius: 50%;
+  border-top: 3px solid #7e7e7e;
+  animation: spin 2s linear infinite;
+}
+  /* Safari */
+@-webkit-keyframes spin {
+  0% {-webkit-transform: rotate(0deg);}
+  100% {-webkit-transform: rotate(360deg);}
+ }
+ @keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}

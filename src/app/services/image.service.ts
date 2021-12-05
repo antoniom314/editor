@@ -8,6 +8,7 @@ import { RectPosition } from '../data-structures';
 })
 export class ImageService {
   private imageFile: any;
+  private moviePosterImageUrl: any;
 
   constructor() {}
 
@@ -15,9 +16,18 @@ export class ImageService {
     this.imageFile = imageFile;
   }
 
+  setMoviePosterImageUrl(moviePosterImageUrl: any) {
+    this.moviePosterImageUrl = moviePosterImageUrl;
+  }
+
   createImage(name: string, layer: Layer, page: any, rect: RectPosition | null): void {
-    let width = page?.nativeElement.getBoundingClientRect().width;
-    let imageObj = new Image();
+    const width = page?.nativeElement.getBoundingClientRect().width;
+    const imageObj = new Image();
+    imageObj.crossOrigin = 'Anonymous';
+
+    if (this.moviePosterImageUrl) {
+      imageObj.src = this.moviePosterImageUrl;
+    }
 
     if (this.imageFile) {
       let binaryData = [];
@@ -28,10 +38,12 @@ export class ImageService {
       imageObj.src = url;
     }
 
+    console.log(imageObj.src);
+
+
     imageObj.onload = () => {
       const aspectRatio = imageObj.height / imageObj.width;
       const height: number = aspectRatio * width;
-
       let image;
       if (rect != null) {
         image = new Konva.Image({
@@ -54,14 +66,19 @@ export class ImageService {
           draggable: true,
         });
       }
+      // It will not be deleted when selected
+      if (this.moviePosterImageUrl) {
+        // Add random name
+        name = 'poster'
+      }
       const transformer = new Konva.Transformer();
-
       transformer.addName(name);
       layer.add(transformer);
       transformer.nodes([image]);
 
       this.addHoverListener(image);
       this.addSelectListener(image, transformer);
+
 
       layer.add(image);
     };

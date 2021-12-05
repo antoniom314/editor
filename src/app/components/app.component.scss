@@ -1,9 +1,8 @@
-
-#editor {
+#container {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  // margin-right: auto;
-  // margin-left: auto;
-  // max-width: 820px;
+}
+#editor {
+  // max-width: 800px;
   background-color: #5daa69d2;
   border-color: #24802c;
   border-style: solid;
@@ -26,7 +25,6 @@
 #dropdown-menu {
   display: none;
 }
-
 select {
   background-color: rgba(238, 238, 238, 0.945);
   height: 1.88em;
@@ -36,7 +34,6 @@ select {
 option {
   background-color: white;
 }
-
 a::active {
   background-color: #6e684f;
 }
@@ -56,4 +53,9 @@ input {
 .select {
   background-color: #FAF1CF;
 }
-
+@media screen and (min-width: 574px) {
+  #container {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+}

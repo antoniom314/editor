@@ -1,6 +1,8 @@
-# FrontendClient
+# Editor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+Canvas editor
+
+Compose posters, resumes or memes and export to JPG or PDF.
 
 ## Development server
 
